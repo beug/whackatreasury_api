@@ -42,7 +42,6 @@ void setup() {
   size(boardSize - 20, boardSize + 60);
   background(0);
   loadingAnim = loadImage("extras/rokali.jpg");
- //listRequest = new HTMLRequest(this,"http://api.jsheckler.ny4dev.etsy.com/v2/makerfaire/");
  //listRequest.makeRequest();
   // set up target origins
   origins[0] = new Coord(0, 0);
@@ -56,7 +55,7 @@ void setup() {
   origins[8] = new Coord(2, 2);
   
   // set up request types
-  findAllGamesRequest = new HTMLRequest(this,"http://api.jsheckler.ny4dev.etsy.com/v2/makerfaire/games?status=ready&limit=1");
+  findAllGamesRequest = new HTMLRequest(this,"/* insert URL here */");
   timer = new Timer(2000); // display image in millis
   textFont(font);
 }
@@ -96,7 +95,7 @@ void draw() {
     } else { // still playing the same game
       // run the game
       
-      getGameRequest = new HTMLRequest(this,"http://api.jsheckler.ny4dev.etsy.com/v2/makerfaire/games/" + g.gameID + "/?status=ready&includes=GameListings");
+      getGameRequest = new HTMLRequest(this,"/* insert URL here */" + g.gameID + "/?status=ready&includes=GameListings");
       if (g.listingRequestSent) {
         if (g.isReady() == true) {
           // start showing images
@@ -113,7 +112,7 @@ void draw() {
                 timer.start();
               } else {
                 // Game is over
-                updateGameFinishedRequest = new HTMLRequest(this, "http://api.jsheckler.ny4dev.etsy.com/v2/makerfaire/games/" + g.gameID + "/?status=played&method=PUT");
+                updateGameFinishedRequest = new HTMLRequest(this, "/* insert URL here */" + g.gameID + "/?status=played&method=PUT");
                 updateGameFinishedRequest.makeRequest(); // Send current game status 
                 
                 // trigger new game from here
@@ -166,7 +165,7 @@ void keyPressed() {
   Integer k = (Integer)Character.digit(key, 10);
   if (k.equals((Integer)curPosKey+1)) {
     g.successfulHits++;
-    updateGameListingsRequest = new HTMLRequest(this,"http://api.jsheckler.ny4dev.etsy.com/v2/makerfaire/games/" + g.gameID + "/listings/" + g.curListing.getListingID() + "/?status=" + thisShit + "&method=PUT");  
+    updateGameListingsRequest = new HTMLRequest(this,"/* insert URL here */" + g.gameID + "/listings/" + g.curListing.getListingID() + "/?status=" + thisShit + "&method=PUT");  
     updateGameListingsRequest.makeRequest(); 
   } else {
     println("BOO!"); 
